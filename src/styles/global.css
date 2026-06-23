@@ -256,13 +256,14 @@ img {
   left: 0;
   right: 0;
   z-index: 100;
-  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+  transition: background 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
 }
 .nav.scrolled {
-  background: rgba(6, 7, 13, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* Solid (near-opaque) instead of backdrop-blur — a fixed blurred bar
+     re-samples everything scrolling behind it every frame, which tanks
+     scroll FPS the moment images pass under it. */
+  background: rgba(6, 7, 13, 0.94);
   border-bottom: 1px solid var(--border);
 }
 .nav-inner {
@@ -718,24 +719,25 @@ img {
 .project-card:hover {
   transform: translateY(-6px);
 }
+/* Soft corner glow via a radial-gradient (cheap, painted once) instead of a
+   live blur filter — blur() filters are recomputed by the GPU and there was
+   one on every card + the modal, a big source of jank. */
 .project-glow {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.25;
-  top: -60px;
-  right: -40px;
+  width: 320px;
+  height: 320px;
+  opacity: 0.28;
+  top: -120px;
+  right: -100px;
   transition: opacity 0.4s;
   pointer-events: none;
 }
 .project-card:hover .project-glow {
-  opacity: 0.5;
+  opacity: 0.45;
 }
-.glow-cyan { background: var(--cyan); }
-.glow-violet { background: var(--violet); }
-.glow-magenta { background: var(--magenta); }
+.glow-cyan { background: radial-gradient(circle, var(--cyan) 0%, transparent 65%); }
+.glow-violet { background: radial-gradient(circle, var(--violet) 0%, transparent 65%); }
+.glow-magenta { background: radial-gradient(circle, var(--magenta) 0%, transparent 65%); }
 
 .project-top {
   display: flex;
@@ -807,9 +809,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(3, 4, 8, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(2, 3, 6, 0.96);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -888,16 +888,17 @@ img {
   color: var(--text-faint);
   position: sticky;
   top: 0;
-  background: rgba(10, 12, 20, 0.92);
-  backdrop-filter: blur(8px);
+  background: #0a0c14;
   z-index: 2;
 }
 .deck-tile {
   width: 100%;
   display: block;
-  /* Skip rendering/decoding tiles that are scrolled out of view */
+  /* Skip rendering/decoding tiles that are scrolled out of view.
+     Intrinsic size matches the on-screen render (~880px wide tiles at the
+     source 1100:1400 ratio) so revealing a tile doesn't reflow the column. */
   content-visibility: auto;
-  contain-intrinsic-size: 1100px 1400px;
+  contain-intrinsic-size: 880px 1120px;
 }
 .modal-deck-empty {
   padding: 30px 40px 40px;
@@ -1077,8 +1078,7 @@ img {
     flex-direction: column;
     gap: 18px;
     padding: 24px;
-    background: rgba(6, 7, 13, 0.95);
-    backdrop-filter: blur(16px);
+    background: rgba(6, 7, 13, 0.98);
     border-bottom: 1px solid var(--border);
   }
   .nav-cta .btn-resume-text { display: none; }

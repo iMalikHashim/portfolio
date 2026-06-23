@@ -1,6 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile } from "../data/portfolio";
+import SafeCanvas from "./SafeCanvas";
 
 // Lazy-load the WebGL scene so the page paints instantly and never blocks.
 const Scene3D = lazy(() => import("./Scene3D"));
@@ -19,9 +20,11 @@ export default function Hero() {
   return (
     <header className="hero" id="top">
       <div className="hero-canvas" aria-hidden="true">
-        <Suspense fallback={null}>
-          <Scene3D />
-        </Suspense>
+        <SafeCanvas>
+          <Suspense fallback={null}>
+            <Scene3D />
+          </Suspense>
+        </SafeCanvas>
       </div>
 
       <div className="container">

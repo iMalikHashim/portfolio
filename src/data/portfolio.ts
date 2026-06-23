@@ -232,23 +232,44 @@ export type Project = {
   stack: string[];
   accent: string; // gradient key
   featured?: boolean;
+  image?: string; // card thumbnail (relative path under public/)
+  deck?: string; // full case-study deck image shown in the detail modal
 };
 
 export const projects: Project[] = [
   {
-    name: "Verasana White-Label Suite",
-    category: "Health & Wellness · Mobile",
-    year: "2024 — Present",
+    name: "Stashie",
+    category: "E-Commerce · Web & UI/UX",
+    year: "2024",
     blurb:
-      "A fleet of 8 white-label fitness & wellness apps for US businesses — video courses, live chat, performance dashboards and FastTrack coaching programs.",
+      "A bold, modern e-commerce experience for a multi-brand cannabis & hashables retailer — vibrant product discovery, brand storytelling and a conversion-focused storefront across desktop and mobile.",
     highlights: [
-      "8 products owned end-to-end, leading a team of 3",
-      "Mux video + Stream chat + GCS media at production scale",
-      "Automated iOS/Android release pipeline via Fastlane",
+      "Modernized, easy-to-navigate storefront experience",
+      "Brand-forward product discovery & merchandising",
+      "Fully responsive — desktop & mobile",
     ],
-    stack: ["React Native", "Flutter", "TypeScript", "Mux", "Stream", "Fastlane"],
+    stack: ["React", "Next.js", "TypeScript", "UI/UX", "E-Commerce"],
+    accent: "magenta",
+    featured: true,
+    image: "./projects/stashie.jpg",
+    deck: "./decks/stashie.jpg",
+  },
+  {
+    name: "MatrixLink",
+    category: "Corporate Training · Mobile",
+    year: "2024",
+    blurb:
+      "A mobile-first corporate training platform for Matrix Trade Institute — short-form video microlearning, FastTrack programs and live performance dashboards built for distributed frontline teams.",
+    highlights: [
+      "Short-form video microlearning workflows",
+      "Real-time team performance dashboards",
+      "Mux video pipeline + mobile-first UX",
+    ],
+    stack: ["Flutter", "Mux", "PostgreSQL", "Dashboards", "Microlearning"],
     accent: "cyan",
     featured: true,
+    image: "./projects/matrixlink.jpg",
+    deck: "./decks/matrixlink.jpg",
   },
   {
     name: "CRV Surveillance Platform",
@@ -264,6 +285,40 @@ export const projects: Project[] = [
     stack: ["NestJS", "Next.js", "Flutter", "PostgreSQL", "Prisma", "Google Maps"],
     accent: "violet",
     featured: true,
+    image: "./projects/crv.jpg",
+    deck: "./decks/crv.jpg",
+  },
+  {
+    name: "OptoX",
+    category: "SaaS · Collaboration & PM",
+    year: "2024",
+    blurb:
+      "A unified workspace for team communication, project tracking and shared documents — real-time dashboards, SLA monitoring and call/interaction analytics in a single hub.",
+    highlights: [
+      "Project tracking & team collaboration in one workspace",
+      "Real-time SLA & interaction analytics dashboards",
+      "Vue + .NET + PostgreSQL, hosted on Azure",
+    ],
+    stack: ["Vue.js", ".NET", "PostgreSQL", "Azure", "Real-Time"],
+    accent: "cyan",
+    featured: true,
+    image: "./projects/optox.jpg",
+    deck: "./decks/optox.jpg",
+  },
+  {
+    name: "Verasana White-Label Suite",
+    category: "Health & Wellness · Mobile",
+    year: "2024 — Present",
+    blurb:
+      "A fleet of 8 white-label fitness & wellness apps for US businesses — video courses, live chat, performance dashboards and FastTrack coaching programs.",
+    highlights: [
+      "8 products owned end-to-end, leading a team of 3",
+      "Mux video + Stream chat + GCS media at production scale",
+      "Automated iOS/Android release pipeline via Fastlane",
+    ],
+    stack: ["React Native", "Flutter", "TypeScript", "Mux", "Stream", "Fastlane"],
+    accent: "violet",
+    deck: "./decks/verasana.jpg",
   },
   {
     name: "Atualizado Ride-Sharing",
@@ -324,10 +379,51 @@ export const projects: Project[] = [
   },
 ];
 
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  avatar: string;
+  tags: string[];
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "Hashim took our application architecture and code base from alright to exceptional.",
+    name: "Shirley Yu",
+    role: "CEO, Choosii",
+    avatar: "./testimonials/shirley.png",
+    tags: ["Mobile App Development", "Product Design", "UI/UX"],
+  },
+  {
+    quote: "Hashim transformed our product and website experience.",
+    name: "Dustin Peugeot",
+    role: "CEO, Matrix Trade Institute",
+    avatar: "./testimonials/dustin.png",
+    tags: ["UI/UX", "Website", "Product Design"],
+  },
+  {
+    quote: "Hashim made it modernized, easy to navigate, and incredibly fresh.",
+    name: "Taylor Crossman",
+    role: "Product Manager, Stashie",
+    avatar: "./testimonials/taylor.png",
+    tags: ["UI/UX", "Website", "Product Design"],
+  },
+  {
+    quote: "Hashim built our complete digital presence.",
+    name: "Nihel Chabrak",
+    role: "CEO, Vision Nest",
+    avatar: "./testimonials/nihel.png",
+    tags: ["Branding", "Website", "Social Presence"],
+  },
+];
+
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Work", href: "#work" },
+  { label: "Voices", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];

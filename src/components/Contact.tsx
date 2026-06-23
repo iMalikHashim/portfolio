@@ -7,7 +7,7 @@ export default function Contact() {
       <div className="container">
         <Reveal className="contact-wrap">
           <span className="section-label" style={{ justifyContent: "center", display: "inline-flex" }}>
-            05 — Contact
+            06 — Contact
           </span>
           <h2 className="contact-title">
             Let's build something <span className="gradient-text">futuristic</span>

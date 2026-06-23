@@ -173,11 +173,11 @@ img {
 
 /* ════════════════ Glass cards ════════════════ */
 .glass {
-  background: var(--surface);
+  /* Slightly opaque panel instead of live backdrop-blur — visually almost
+     identical over the dark background, but vastly cheaper to scroll. */
+  background: rgba(255, 255, 255, 0.035);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   position: relative;
   overflow: hidden;
 }
@@ -892,9 +892,12 @@ img {
   backdrop-filter: blur(8px);
   z-index: 2;
 }
-.modal-deck img {
+.deck-tile {
   width: 100%;
   display: block;
+  /* Skip rendering/decoding tiles that are scrolled out of view */
+  content-visibility: auto;
+  contain-intrinsic-size: 1100px 1400px;
 }
 .modal-deck-empty {
   padding: 30px 40px 40px;

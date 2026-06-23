@@ -52,7 +52,7 @@ function CoreObject() {
 function StarField() {
   const ref = useRef<THREE.Points>(null!);
   const positions = useMemo(() => {
-    const count = 1400;
+    const count = 800;
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const r = 6 + Math.random() * 9;
@@ -86,12 +86,14 @@ function StarField() {
   );
 }
 
-export default function Scene3D() {
+export default function Scene3D({ active = true }: { active?: boolean }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 6], fov: 45 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 1.5]}
+      frameloop={active ? "always" : "never"}
+      performance={{ min: 0.5 }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
       <Suspense fallback={null}>
         <ambientLight intensity={0.4} />

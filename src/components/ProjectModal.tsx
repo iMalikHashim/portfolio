@@ -73,12 +73,21 @@ export default function ProjectModal({ project, onClose }: Props) {
               </div>
             </div>
 
-            {project.deck ? (
+            {project.deck && project.deckTiles ? (
               <div className="modal-deck">
                 <div className="modal-deck-label">
                   Full case study — design, architecture & outcomes
                 </div>
-                <img src={project.deck} alt={`${project.name} full case study`} />
+                {Array.from({ length: project.deckTiles }).map((_, i) => (
+                  <img
+                    key={i}
+                    className="deck-tile"
+                    src={`${project.deck}/${i}.jpg`}
+                    alt={`${project.name} case study — section ${i + 1}`}
+                    loading={i < 2 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                ))}
               </div>
             ) : (
               <div className="modal-deck-empty">

@@ -233,7 +233,8 @@ export type Project = {
   accent: string; // gradient key
   featured?: boolean;
   image?: string; // card thumbnail (relative path under public/)
-  deck?: string; // full case-study deck image shown in the detail modal
+  deck?: string; // base path of the sliced case-study deck (tiles at `${deck}/${i}.jpg`)
+  deckTiles?: number; // number of lazy-loaded deck tiles
 };
 
 export const projects: Project[] = [
@@ -252,7 +253,8 @@ export const projects: Project[] = [
     accent: "magenta",
     featured: true,
     image: "./projects/stashie.jpg",
-    deck: "./decks/stashie.jpg",
+    deck: "./decks/stashie",
+    deckTiles: 11,
   },
   {
     name: "MatrixLink",
@@ -269,7 +271,8 @@ export const projects: Project[] = [
     accent: "cyan",
     featured: true,
     image: "./projects/matrixlink.jpg",
-    deck: "./decks/matrixlink.jpg",
+    deck: "./decks/matrixlink",
+    deckTiles: 5,
   },
   {
     name: "CRV Surveillance Platform",
@@ -286,7 +289,8 @@ export const projects: Project[] = [
     accent: "violet",
     featured: true,
     image: "./projects/crv.jpg",
-    deck: "./decks/crv.jpg",
+    deck: "./decks/crv",
+    deckTiles: 4,
   },
   {
     name: "OptoX",
@@ -303,7 +307,8 @@ export const projects: Project[] = [
     accent: "cyan",
     featured: true,
     image: "./projects/optox.jpg",
-    deck: "./decks/optox.jpg",
+    deck: "./decks/optox",
+    deckTiles: 4,
   },
   {
     name: "Verasana White-Label Suite",
@@ -318,7 +323,8 @@ export const projects: Project[] = [
     ],
     stack: ["React Native", "Flutter", "TypeScript", "Mux", "Stream", "Fastlane"],
     accent: "violet",
-    deck: "./decks/verasana.jpg",
+    deck: "./decks/verasana",
+    deckTiles: 14,
   },
   {
     name: "Atualizado Ride-Sharing",

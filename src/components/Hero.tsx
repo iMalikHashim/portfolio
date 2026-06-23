@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile } from "../data/portfolio";
 import SafeCanvas from "./SafeCanvas";
@@ -8,6 +8,9 @@ const Scene3D = lazy(() => import("./Scene3D"));
 
 export default function Hero() {
   const [roleIdx, setRoleIdx] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+  // Only run the WebGL render loop while the hero is on screen.
+  const [sceneActive, setSceneActive] = useState(true);
 
   useEffect(() => {
     const id = setInterval(
@@ -17,12 +20,23 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setSceneActive(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <header className="hero" id="top">
+    <header className="hero" id="top" ref={heroRef}>
       <div className="hero-canvas" aria-hidden="true">
         <SafeCanvas>
           <Suspense fallback={null}>
-            <Scene3D />
+            <Scene3D active={sceneActive} />
           </Suspense>
         </SafeCanvas>
       </div>
